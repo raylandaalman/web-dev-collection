@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Simple To-do</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta rel="icon" href="favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+    <section class="main-head">
+        <header class="header">
+            <div class="header-div">
+            </div>
+        </header>
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>
