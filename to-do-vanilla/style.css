@@ -7,9 +7,52 @@ body {
     background-color: #777;
 }
 
-.header-div {
+.header {
     height: 4rem;
     background-color: #fff;
+}
+
+.header-left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-left-title {
+    margin-left: 2rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: 'Sixtyfour', sans-serif;
+    text-decoration: underline;
+}
+
+.title-extra {
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: 'Sixtyfour', sans-serif;
+}
+
+.header-left-apps {
+    width: 100%;
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Sixtyfour', sans-serif;
+}
+
+.header-left-app {
+    border: 2px solid black;
+    padding: 0.5rem;
+    background-color: #ccc;
+    transition: 200ms ease-in-out;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.header-left-app:hover {
+    background-color: #333;
+    color: #ccc
 }
 
 .main-div {
