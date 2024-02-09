@@ -103,6 +103,49 @@ body {
     padding-top: 1rem;
 }
 
+.todo-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    border: 2px solid black;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background-color: #ccc;
+    font-family: 'Roboto', sans-serif;
+}
+
+.todo-images {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.todo-entry img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 4px solid #888;
+    cursor: pointer;
+    transition: transform 200ms;
+}
+
+.todo-entry img:hover {
+    transform: scale(1.1);
+}
+
+.check {
+    background-color: #006600;
+    border-radius: 8px;
+    padding: 2px;
+}
+
+.trash {
+    background-color: #660000;
+    border-radius: 8px;
+    padding: 2px;
+    margin-left: 0.25rem;
+}
+
 .todo-new-entry {
     padding-bottom: 0.5rem;
     width: 100%;
@@ -119,7 +162,7 @@ body {
     margin-right: 0.5rem;
 }
 
-.todo-input:focus, .todo-add:focus{
+.todo-input:focus, .todo-add:focus, .todo-input:hover, .todo-add:hover{
     outline: 2px solid white;
     box-shadow: 8px 5px 13px #222;
 }
