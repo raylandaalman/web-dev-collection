@@ -40,7 +40,6 @@ initializeTrash = (item) => {
 
 
 textBox.addEventListener("keydown", () => {
-
     if (event.keyCode === 13) {
         addButton.click();
     }
