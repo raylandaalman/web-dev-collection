@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Simple To-do</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.png"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="main-head">
+        <header class="header">
+            <div class="header-left">
+                <p class="header-left-title">Apps</p><p class="title-extra">:</p>
+                <div class="header-left-apps">
+                    <p class="header-left-app">To-Do</p>
+                    <p class="header-left-app">Calculator</p>
+                </div>
+            </div>
+            <div class="header-right">
+                
+            </div>
+        </header>
+    </section>
+    <main>
+        <section class="main-body">
+            <div class="main-div">
+                <div class="todo">
+                    <div class="todo-head">
+                        <p class="todo-head-title">Groceries</p>
+                        <p class="todo-head-remain">2 tasks remaining</p>
+                    </div>
+                    <div class="todo-body">
+                        <div class="todo-entry">
+                            <p class="todo-entry-text">Get 4 liters of water</p>
+                            <div class="todo-images">
+                                <img src="img/check.svg" class="check"/>
+                                <img src="img/trash.svg" class="trash"/>
+                            </div>
+                        </div>
+                        <div class="todo-entry">
+                            <p class="todo-entry-text">Get 1kg of beans</p>
+                            <div class="todo-images">
+                                <img src="img/check.svg" class="check"/>
+                                <img src="img/trash.svg" class="trash"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="todo-new-entry">
+                        <input type="text" class="todo-input">
+                        <button class="todo-add">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

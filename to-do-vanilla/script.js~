@@ -5,6 +5,7 @@ const textBox = document.querySelector(".todo-input");
 let check = document.querySelectorAll(".check");
 let trash = document.querySelectorAll(".trash");
 
+
 check.forEach((item) => {
     item.addEventListener("click", () => {
         item.parentElement.previousElementSibling.
