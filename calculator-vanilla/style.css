@@ -93,6 +93,7 @@ body {
     text-align: end;
     color: #ddd;
     padding-right: 1rem;
+    transform: transition 7s;
 }
 
 .solar-dressing {
@@ -160,6 +161,14 @@ body {
     color: #fff;
 }
 
+.calc-keys-operators button:hover, #clear:hover {
+    background-color: #993333;
+}
+
+.calc-keys-operators button:active, #clear:active {
+    background-color: #882222;
+}
+
 button {
     font-family: "Micro 5", sans-serif;
     font-size: 2rem;
@@ -170,4 +179,3 @@ button {
 button:hover {
     cursor: pointer;
 }
-
