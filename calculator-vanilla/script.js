@@ -82,31 +82,41 @@ const calculate = (input) => {
             }
         // handing numbers, do not have leading zeroes
         } else {
-            if(state.panelDisplay[0] === '0') {
+            if(state.panelDisplay.length > 14) {
+                clearState();
+                display.innerText = "Err: overflow";
+            } else if(state.panelDisplay[0] === '0') {
                 state.panelDisplay = '';
                 state.query = '';
+            } else {
+                updateOperand(input);
+                updateDisplay();
             }
-            updateOperand(input);
-            updateDisplay();
         }
+    // clear button
     } else if(input === 'c') {
         clearState();
         display.innerText = 0;
+    // equal button, with overflow protection
     } else if (input === '=') {
-        const answer = eval(state.query)// launch function to solve
-        state.query = answer;
-        state.panelDisplay = answer;
+        const solution = eval(state.query)// launch function to solve
+        if(solution  > 999999999999999) {
+            display.innerText = "Err: overflow";
+        } else {
+            display.innerText = solution.toString().substring(0,15);
+        }
+        state.query = solution;
+        state.panelDisplay = solution;
         state.periodPressed = false;
         state.operatorSelected = false;
         state.isSolved = true;
-        updateDisplay();
+    // remaining operators
     } else {
         if(state.operatorSelected === true) {
             state.query = state.query.substring(0, state.query.length -1) + input;
             state.panelDisplay = input;
             updateDisplay();
         } else {
-            console.log("Operator");
             state.operatorSelected = true;
             updateOperator(input);
             updateDisplay();
