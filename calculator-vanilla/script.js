@@ -45,7 +45,7 @@ const operation = (input) => {
         }
     } else if(input === "=") {
         let solution = eval(query);
-        if(solution >= 999999999999999) {
+        if(solution > 999999999999999) {
             display.innerText = "Err: overflow";
         } else {
             display.innerText = solution.toString().substring(0,15);
