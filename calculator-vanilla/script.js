@@ -24,7 +24,7 @@ const operation = (input) => {
             state.isSolved = false;
             state.operatorSelected = false;
         }
-        if(query.length === 0 && input === "0") {
+        if(panelDisplay.length === 0 && input === "0") {
             ;
         } else if(state.periodSelected === true && input === ".") {
             ;
