@@ -45,18 +45,14 @@ const updateOperator = (value) => {
     state.periodPressed = false;
 }
 
+const splitString = (expression) => {
 
+    const splitArray = [];
 
-
-
-const solve  = (expression) => {
-
-    let prodAndQuot = [];
-
-    let j = 0;
+    let inNumber = false;
     let numberStart = 0;
     let numberEnd = 0;
-    let inNumber = false;
+    let j = 0;
 
     for(let i = 0; i < expression.length; i++) {
 
@@ -65,26 +61,91 @@ const solve  = (expression) => {
                 inNumber = true;
                 numberStart = i;
             }
-        }
-
-        if(expression[i] === '+' || expression[i] === '-') {
+        } else if(expression[i] === '+' || expression[i] === '-' ||
+           expression[i] === '*' || expression[i] === '/') {
             inNumber = false;
             numberEnd = i;
-            prodAndQuot[j] = expression.substring(numberStart, numberEnd);
+            splitArray[j] = expression.substring(numberStart, numberEnd);
             j++;
-            prodAndQuot[j] = expression[i];
+            splitArray[j] = expression[i];
+            j++;
+        } else if(expression[i] === '.') {
+            splitArray[j] = expression[i];
             j++;
         }
 
         if(i === expression.length -1) {
             numberEnd = i + 1;
-            prodAndQuot[j] = expression.substring(numberStart, numberEnd);
+            splitArray[j] = expression.substring(numberStart, numberEnd);
         }
-
     }
 
-    console.log(prodAndQuot);
+    return splitArray;
 
+};
+
+
+const solveMultiplyDivide = (array) => {
+
+    const solveMultDiv = [];
+
+    let priorityState = false;
+    let j = 0;
+
+    for(let i = 0; i < array.length; i++) {
+
+        if(array[i] === '+' || array[i] === '-') {
+            if(priorityState === true) {
+                priorityState = false;
+                solveMultDiv[j] = array[i];
+                j++;
+            } else if(priorityState === false) {
+                solveMultDiv[j] = array[i-1];
+                j++;
+                solveMultDiv[j] = array[i];
+                j++;
+            }
+        } else if(array[i] === '*') {
+            if(priorityState === false) {
+                solveMultDiv[j] = (array[i-1] * array[i+1]).toString();
+                j++;
+                i++;
+                priorityState = true;
+            } else if(priorityState === true) {
+                solveMultDiv[j-1] = (solveMultDiv[j-1] * array[i+1]).toString();
+                i++;
+            }
+        } else if(array[i] === '/') {
+            if(priorityState === false) {
+                solveMultDiv[j] = (array[i-1] / array[i+1]).toString();
+                j++;
+                i++;
+                priorityState = true;
+            } else if(priorityState === true) {
+                solveMultDiv[j-1] = (solveMultDiv[j-1] / array[i+1]).toString();
+                i++;
+            }
+        }
+    }
+
+    return solveMultDiv;
+}
+
+
+
+
+const solve  = (expression) => {
+
+    const solveMultDiv = [];
+    const solveAddSub = [];
+
+    let inProdDiv = true;
+
+    const expressArr = splitString(expression);
+
+    const multDivArr = solveMultiplyDivide(expressArr);
+
+    console.log(multDivArr);
 }
 
 
