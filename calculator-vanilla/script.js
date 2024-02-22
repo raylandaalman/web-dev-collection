@@ -46,9 +46,66 @@ const updateOperator = (value) => {
 }
 
 
+
+
+
+const solve  = (expression) => {
+
+    let prodAndQuot = [];
+
+    let j = 0;
+    let numberStart = 0;
+    let numberEnd = 0;
+    let inNumber = false;
+
+    for(let i = 0; i < expression.length; i++) {
+
+        if(!isNaN(Number(expression[i]))) {
+            if(inNumber === false) {
+                inNumber = true;
+                numberStart = i;
+            }
+        }
+
+        if(expression[i] === '+' || expression[i] === '-') {
+            inNumber = false;
+            numberEnd = i;
+            prodAndQuot[j] = expression.substring(numberStart, numberEnd);
+            j++;
+            prodAndQuot[j] = expression[i];
+            j++;
+        }
+
+        if(i === expression.length -1) {
+            numberEnd = i + 1;
+            prodAndQuot[j] = expression.substring(numberStart, numberEnd);
+        }
+
+    }
+
+    console.log(prodAndQuot);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const calculate = (input) => {
-
-
 
     if(!isNaN(Number(input)) || input === '.') {
 
@@ -99,7 +156,7 @@ const calculate = (input) => {
         display.innerText = 0;
     // equal button, with overflow protection
     } else if (input === '=') {
-        const solution = eval(state.query)// launch function to solve
+        const solution = solve(state.query)// launch function to solve
         if(solution  > 999999999999999) {
             display.innerText = "Err: overflow";
         } else {
