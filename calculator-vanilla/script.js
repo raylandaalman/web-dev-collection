@@ -45,6 +45,7 @@ const updateOperator = (value) => {
     state.periodPressed = false;
 }
 
+
 const splitString = (expression) => {
 
     const splitArray = [];
@@ -53,6 +54,10 @@ const splitString = (expression) => {
     let numberStart = 0;
     let numberEnd = 0;
     let j = 0;
+
+    if(expression.length === 1) {
+        return expression;
+    };
 
     for(let i = 0; i < expression.length; i++) {
 
@@ -67,9 +72,6 @@ const splitString = (expression) => {
             numberEnd = i;
             splitArray[j] = expression.substring(numberStart, numberEnd);
             j++;
-            splitArray[j] = expression[i];
-            j++;
-        } else if(expression[i] === '.') {
             splitArray[j] = expression[i];
             j++;
         }
@@ -87,12 +89,16 @@ const splitString = (expression) => {
 
 const solveMultiplyDivide = (array) => {
 
+    if(array.length === 1) {
+        return array;
+    }
+
     const solveMultDiv = [];
 
     let priorityState = false;
     let j = 0;
 
-    for(let i = 0; i < array.length; i++) {
+    for(let i = 0; i < array.length-1; i++) {
 
         if(array[i] === '+' || array[i] === '-') {
             if(priorityState === true) {
@@ -125,13 +131,56 @@ const solveMultiplyDivide = (array) => {
                 solveMultDiv[j-1] = (solveMultDiv[j-1] / array[i+1]).toString();
                 i++;
             }
+        } else {
         }
     }
 
+
+    if(array[array.length -2] === '+' || array[array.length -2] === '-') {
+        solveMultDiv[j] = array[array.length-1];
+    }
+
     return solveMultDiv;
-}
+};
 
 
+const solveAddSubtract = (array) => {
+
+    if(array.length === 1) {
+        return array[0];
+    };
+
+    let afterFirstSumDiff = false;
+    let answer = 0;
+
+    for(let i = 0; i < array.length; i++) {
+
+        if(array[i] === '+' || array[i] === '-') {
+
+            if(afterFirstSumDiff === true) {
+                if(array[i] === '+') {
+                    answer = answer + Number(array[i+1]);
+                    i++;
+                } else if(array[i] === '-') {
+                    answer = answer - Number(array[i+1]);
+                    i++
+                }
+            } else if(afterFirstSumDiff === false) {
+                if(array[i] === '+') {
+                    answer = Number(array[i-1]) + Number(array[i+1]);
+                    i++;
+                    afterFirstSumDiff = true;
+                } else if(array[i] === '-') {
+                    answer = Number(array[i-1]) - Number(array[i+1]);
+                    i++;
+                    afterFirstSumDiff = true;
+                }
+            }
+        }
+    };
+
+    return answer.toString();
+};
 
 
 const solve  = (expression) => {
@@ -139,31 +188,13 @@ const solve  = (expression) => {
     const solveMultDiv = [];
     const solveAddSub = [];
 
-    let inProdDiv = true;
 
     const expressArr = splitString(expression);
 
     const multDivArr = solveMultiplyDivide(expressArr);
 
-    console.log(multDivArr);
+    return solveAddSubtract(multDivArr);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const calculate = (input) => {
@@ -179,7 +210,7 @@ const calculate = (input) => {
             if(state.periodPressed === true) {
                 ;
             } else if(state.panelDisplay.length === 0) {
-                updateOperand('0' + input);
+                updateOperand('0.');
                 state.periodPressed = true;
                 updateDisplay();
             } else {
@@ -203,9 +234,11 @@ const calculate = (input) => {
             if(state.panelDisplay.length > 14) {
                 clearState();
                 display.innerText = "Err: overflow";
-            } else if(state.panelDisplay[0] === '0') {
+            } else if(state.panelDisplay[state.panelDisplay.length-1] === '0') {
                 state.panelDisplay = '';
                 state.query = '';
+                updateOperand(input);
+                updateDisplay();
             } else {
                 updateOperand(input);
                 updateDisplay();
@@ -217,11 +250,12 @@ const calculate = (input) => {
         display.innerText = 0;
     // equal button, with overflow protection
     } else if (input === '=') {
-        const solution = solve(state.query)// launch function to solve
+        let solution;
+        solution = solve(state.query) // launch function to solve
         if(solution  > 999999999999999) {
             display.innerText = "Err: overflow";
         } else {
-            display.innerText = solution.toString().substring(0,15);
+            display.innerText = solution.substring(0,15);
         }
         state.query = solution;
         state.panelDisplay = solution;
@@ -242,8 +276,6 @@ const calculate = (input) => {
     }
 };
 
-
-
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         calculate(button.innerText);
@@ -257,3 +289,7 @@ solar.addEventListener('mouseover', () => {
 solar.addEventListener('mouseout', () => {
     display.classList.remove('cover');
 });
+
+calculate('0');
+calculate('.');
+calculate('2');
