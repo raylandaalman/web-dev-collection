@@ -1,9 +1,14 @@
 'use strict'
 
+////////////////////////////
+
 const buttons = document.querySelectorAll('.button');
 
 const solar = document.querySelector('.panel');
 const display = document.querySelector('.calc-display-content');
+
+
+////////////////////////////
 
 
 const state = {
@@ -16,6 +21,9 @@ const state = {
 };
 
 
+////////////////////////////
+
+
 const clearState = () => {
     state.query = '';
     state.panelDisplay = '';
@@ -24,9 +32,11 @@ const clearState = () => {
     state.isSolved = false;
 };
 
+
 const updateDisplay = () => {
     display.innerText = state.panelDisplay;
 };
+
 
 const updateOperand = (value) => {
     if(state.operatorSelected === true) {
@@ -37,6 +47,7 @@ const updateOperand = (value) => {
     state.panelDisplay += value;
 }
 
+
 const updateOperator = (value) => {
     state.query += value;
     state.panelDisplay = value;
@@ -44,6 +55,9 @@ const updateOperator = (value) => {
     state.operatorSelected = true;
     state.periodPressed = false;
 }
+
+
+////////////////////////////
 
 
 const splitString = (expression) => {
@@ -81,9 +95,7 @@ const splitString = (expression) => {
             splitArray[j] = expression.substring(numberStart, numberEnd);
         }
     }
-
     return splitArray;
-
 };
 
 
@@ -131,15 +143,12 @@ const solveMultiplyDivide = (array) => {
                 solveMultDiv[j-1] = (solveMultDiv[j-1] / array[i+1]).toString();
                 i++;
             }
-        } else {
         }
     }
-
 
     if(array[array.length -2] === '+' || array[array.length -2] === '-') {
         solveMultDiv[j] = array[array.length-1];
     }
-
     return solveMultDiv;
 };
 
@@ -156,7 +165,6 @@ const solveAddSubtract = (array) => {
     for(let i = 0; i < array.length; i++) {
 
         if(array[i] === '+' || array[i] === '-') {
-
             if(afterFirstSumDiff === true) {
                 if(array[i] === '+') {
                     answer = answer + Number(array[i+1]);
@@ -178,7 +186,6 @@ const solveAddSubtract = (array) => {
             }
         }
     };
-
     return answer.toString();
 };
 
@@ -188,11 +195,8 @@ const solve  = (expression) => {
     const solveMultDiv = [];
     const solveAddSub = [];
 
-
     const expressArr = splitString(expression);
-
     const multDivArr = solveMultiplyDivide(expressArr);
-
     return solveAddSubtract(multDivArr);
 }
 
@@ -294,6 +298,10 @@ const calculate = (input) => {
     }
 };
 
+
+////////////////////////////
+
+
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         calculate(button.innerText);
@@ -307,4 +315,3 @@ solar.addEventListener('mouseover', () => {
 solar.addEventListener('mouseout', () => {
     display.classList.remove('cover');
 });
-
