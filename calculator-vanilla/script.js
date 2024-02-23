@@ -7,9 +7,7 @@ const buttons = document.querySelectorAll('.button');
 const solar = document.querySelector('.panel');
 const display = document.querySelector('.calc-display-content');
 
-
 ////////////////////////////
-
 
 const state = {
     query: '',
@@ -20,9 +18,7 @@ const state = {
     isSolved: false
 };
 
-
 ////////////////////////////
-
 
 const clearState = () => {
     state.query = '';
@@ -56,9 +52,7 @@ const updateOperator = (value) => {
     state.periodPressed = false;
 }
 
-
 ////////////////////////////
-
 
 const splitString = (expression) => {
 
@@ -189,6 +183,7 @@ const solveAddSubtract = (array) => {
     return answer.toString();
 };
 
+////////////////////////////
 
 const solve  = (expression) => {
 
@@ -200,6 +195,7 @@ const solve  = (expression) => {
     return solveAddSubtract(multDivArr);
 }
 
+////////////////////////////
 
 const calculate = (input) => {
 
@@ -298,9 +294,7 @@ const calculate = (input) => {
     }
 };
 
-
 ////////////////////////////
-
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
