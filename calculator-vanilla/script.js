@@ -246,7 +246,7 @@ const calculate = (input) => {
             if(state.panelDisplay.length > 14) {
                 clearState();
                 display.innerText = "Err: overflow";
-            } else if(state.panelDisplay[state.panelDisplay.length-1] === '0') {
+            } else if(state.panelDisplay[0] === '0') {
                 if(state.periodPressed === true) {
                     updateOperand(input);
                     updateDisplay();
@@ -309,3 +309,7 @@ solar.addEventListener('mouseover', () => {
 solar.addEventListener('mouseout', () => {
     display.classList.remove('cover');
 });
+
+calculate('1');
+calculate('0');
+calculate('2');
