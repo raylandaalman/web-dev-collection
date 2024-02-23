@@ -289,7 +289,3 @@ solar.addEventListener('mouseover', () => {
 solar.addEventListener('mouseout', () => {
     display.classList.remove('cover');
 });
-
-calculate('0');
-calculate('.');
-calculate('2');
