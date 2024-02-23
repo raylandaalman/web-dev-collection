@@ -213,6 +213,13 @@ const calculate = (input) => {
                 updateOperand('0.');
                 state.periodPressed = true;
                 updateDisplay();
+            } else if(state.panelDisplay === '+' || 
+                state.panelDisplay === '-' ||
+                state.panelDipslay === '*' ||
+                state.panelDisplay === '/') {
+                    updateOperand('0.');
+                    state.periodPressed = true;
+                    updateDisplay();
             } else {
                 state.periodPressed = true;
                 updateOperand(input);
@@ -223,8 +230,13 @@ const calculate = (input) => {
             if(state.panelDisplay.Length === 0) {
                 updateOperand(input);
                 updateDisplay();
-            } else if(state.panelDisplay[0] === '0') {
-                ;
+            } else if(state.panelDisplay[state.panelDisplay.length-1] === '0') {
+                if(state.periodPressed === true) {
+                    updateOperand(input);
+                    updateDisplay();
+                } else {
+                    ;
+                }
             } else {
                 updateOperand(input);
                 updateDisplay();
@@ -235,10 +247,15 @@ const calculate = (input) => {
                 clearState();
                 display.innerText = "Err: overflow";
             } else if(state.panelDisplay[state.panelDisplay.length-1] === '0') {
-                state.panelDisplay = '';
-                state.query = '';
-                updateOperand(input);
-                updateDisplay();
+                if(state.periodPressed === true) {
+                    updateOperand(input);
+                    updateDisplay();
+                } else {
+                    state.panelDisplay = '';
+                    state.query = '';
+                    updateOperand(input);
+                    updateDisplay();
+                }
             } else {
                 updateOperand(input);
                 updateDisplay();
@@ -270,6 +287,7 @@ const calculate = (input) => {
             updateDisplay();
         } else {
             state.operatorSelected = true;
+            state.periodPressed = false;
             updateOperator(input);
             updateDisplay();
         }
@@ -289,3 +307,4 @@ solar.addEventListener('mouseover', () => {
 solar.addEventListener('mouseout', () => {
     display.classList.remove('cover');
 });
+
