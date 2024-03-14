@@ -186,14 +186,7 @@ const solveAddSubtract = (array) => {
 ////////////////////////////
 
 const solve  = (expression) => solveAddSubtract(solveMultiplyDivide(splitString(expression)));
-/*
-{
-    const expressArr = splitString(expression);
-    const multDivArr = solveMultiplyDivide(expressArr);
-    return solveAddSubtract(multDivArr);
-    return solveAddSubtract(solveMultiplyDivide(splitString(expression)));
-}
-*/
+
 ////////////////////////////
 
 const calculate = (input) => {
