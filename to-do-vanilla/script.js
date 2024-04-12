@@ -46,11 +46,13 @@ initializeCheck = (item) => {
 initializeTrash = (item) => {
     item.addEventListener("click", () => {
 
-        const itemToRemove = item.parentElement.parentElement.innertext;
-        const StorageKeys = Object.keys(sessionStorage);
-        for ( let i = 1; i <= StorageKeys.length; i++ ) {
-            if (sessionStorage.getItem(i) === itemToRemove) {
-                sessionStorage.removeItem(i);
+        console.log(item);
+        const itemToRemove = item.parentElement.parentElement.innerText;
+        const storageKeys = Object.keys(sessionStorage);
+        console.log(itemToRemove, '\n', storageKeys);
+        for ( let i = 0; i <= storageKeys.length; i++ ) {
+            if (sessionStorage.getItem(storageKeys[i]) === itemToRemove) {
+                sessionStorage.removeItem(storageKeys[i]);
             };
         };
 
@@ -75,10 +77,10 @@ trash.forEach((item) => {
     item.addEventListener("click", () => {
 
         const itemToRemove = item.parentElement.parentElement.innerText;
-        const StorageKeys = Object.keys(sessionStorage);
-        for ( let i = 1; i <= StorageKeys.length; i++ ) {
-            if (sessionStorage.getItem(i) === itemToRemove) {
-                sessionStorage.removeItem(i);
+        const storageKeys = Object.keys(sessionStorage);
+        for ( let i = 0; i <= storageKeys.length; i++ ) {
+            if (sessionStorage.getItem(storageKeys[i]) === itemToRemove) {
+                sessionStorage.removeItem(storageKeys[i]);
             };
         };
 
