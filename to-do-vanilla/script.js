@@ -1,4 +1,4 @@
-const localStorageKeys = Object.keys(localStorage).sort(function(a,b) {return a-b});
+const sessionStorageKeys = Object.keys(sessionStorage).sort(function(a,b) {return a-b});
 const tasksRemainingText = document.querySelector(".todo-head-remain");
 
 insertItem = (item) => {
@@ -16,8 +16,8 @@ insertItem = (item) => {
 };
 
 
-for (key of localStorageKeys) {
-    insertItem(localStorage.getItem(key));
+for (key of sessionStorageKeys) {
+    insertItem(sessionStorage.getItem(key));
 };
 
 tasksRemainingText.innerText = `${document.querySelectorAll(".check").length} items remaining`;
@@ -29,7 +29,7 @@ const textBox = document.querySelector(".todo-input");
 
 let check = document.querySelectorAll(".check");
 let trash = document.querySelectorAll(".trash");
-let itemNumber = localStorageKeys[localStorageKeys.length -1]
+let itemNumber = sessionStorageKeys[sessionStorageKeys.length -1]
 
 if (isNaN(itemNumber)) {
     itemNumber = 0;
@@ -47,10 +47,10 @@ initializeTrash = (item) => {
     item.addEventListener("click", () => {
 
         const itemToRemove = item.parentElement.parentElement.innertext;
-        const StorageKeys = Object.keys(localStorage);
+        const StorageKeys = Object.keys(sessionStorage);
         for ( let i = 1; i <= StorageKeys.length; i++ ) {
-            if (localStorage.getItem(i) === itemToRemove) {
-                localStorage.removeItem(i);
+            if (sessionStorage.getItem(i) === itemToRemove) {
+                sessionStorage.removeItem(i);
             };
         };
 
@@ -75,11 +75,10 @@ trash.forEach((item) => {
     item.addEventListener("click", () => {
 
         const itemToRemove = item.parentElement.parentElement.innerText;
-        const StorageKeys = Object.keys(localStorage);
-        console.log(itemToRemove, StorageKeys)
+        const StorageKeys = Object.keys(sessionStorage);
         for ( let i = 1; i <= StorageKeys.length; i++ ) {
-            if (localStorage.getItem(i) === itemToRemove) {
-                localStorage.removeItem(i);
+            if (sessionStorage.getItem(i) === itemToRemove) {
+                sessionStorage.removeItem(i);
             };
         };
 
@@ -101,7 +100,7 @@ addButton.addEventListener("click", () => {
     textBox.value = ""
 
     ++itemNumber
-    localStorage.setItem(itemNumber, inputText);
+    sessionStorage.setItem(itemNumber, inputText);
 
     check = document.querySelectorAll(".check");
     trash = document.querySelectorAll(".trash");
