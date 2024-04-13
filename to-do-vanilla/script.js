@@ -1,6 +1,12 @@
 const sessionStorageKeys = Object.keys(sessionStorage).sort(function(a,b) {return a-b});
 const tasksRemainingText = document.querySelector(".todo-head-remain");
+const addButton = document.querySelector(".todo-add");
+const textBox = document.querySelector(".todo-input");
 
+let itemNumber = sessionStorageKeys[sessionStorageKeys.length -1]
+
+
+// Creating elements from text in storage
 insertItem = (item) => {
     insertElement = document.querySelector(".todo-body");
 
@@ -23,70 +29,64 @@ for (key of sessionStorageKeys) {
 tasksRemainingText.innerText = `${document.querySelectorAll(".check").length} items remaining`;
 
 
-
-const addButton = document.querySelector(".todo-add");
-const textBox = document.querySelector(".todo-input");
-
+// These must be run after all values in storage are made into elements
 let check = document.querySelectorAll(".check");
 let trash = document.querySelectorAll(".trash");
-let itemNumber = sessionStorageKeys[sessionStorageKeys.length -1]
 
+// defense against NaN bug
 if (isNaN(itemNumber)) {
     itemNumber = 0;
 };
 
 
-initializeCheck = (item) => {
-    item.addEventListener("click", () => {
-        item.parentElement.previousElementSibling.
-            classList.toggle("todo-entry-complete")
-    });
+// check conditions
+checkFunction = (item) => {
+    item.parentElement.previousElementSibling.
+    classList.toggle("todo-entry-complete")
 };
 
-initializeTrash = (item) => {
+initializeCheck = (item) => {
     item.addEventListener("click", () => {
-
-        console.log(item);
-        const itemToRemove = item.parentElement.parentElement.innerText;
-        const storageKeys = Object.keys(sessionStorage);
-        console.log(itemToRemove, '\n', storageKeys);
-        for ( let i = 0; i <= storageKeys.length; i++ ) {
-            if (sessionStorage.getItem(storageKeys[i]) === itemToRemove) {
-                sessionStorage.removeItem(storageKeys[i]);
-            };
-        };
-
-        item.parentElement.parentElement.remove();
-        const tasksLeft = document.querySelectorAll(".check").length;
-        tasksRemainingText.innerText = tasksLeft + " tasks remaining";
-    })
-}
-
+        checkFunction(item);
+    });
+};
 
 
 check.forEach((item) => {
     item.addEventListener("click", () => {
-        item.parentElement.previousElementSibling.
-            classList.toggle("todo-entry-complete");
+        checkFunction(item);
     });
  });
 
 
 
+// trash conditions
+trashFunction = (item) => {
+    const itemToRemove = item.parentElement.parentElement.innerText;
+    const storageKeys = Object.keys(sessionStorage);
+
+    for ( let i = 0; i <= storageKeys.length; i++ ) {
+        if (sessionStorage.getItem(storageKeys[i]) === itemToRemove) {
+            sessionStorage.removeItem(storageKeys[i]);
+        };
+    };
+
+    item.parentElement.parentElement.remove();
+
+    const tasksLeft = document.querySelectorAll(".check").length;
+    tasksRemainingText.innerText = tasksLeft + " tasks remaining";
+};
+
+
+initializeTrash = (item) => {
+    item.addEventListener("click", () => {
+        trashFunction(item);
+    })
+}
+
 trash.forEach((item) => {
     item.addEventListener("click", () => {
-
-        const itemToRemove = item.parentElement.parentElement.innerText;
-        const storageKeys = Object.keys(sessionStorage);
-        for ( let i = 0; i <= storageKeys.length; i++ ) {
-            if (sessionStorage.getItem(storageKeys[i]) === itemToRemove) {
-                sessionStorage.removeItem(storageKeys[i]);
-            };
-        };
-
-        item.parentElement.parentElement.remove();
-        const tasksLeft = document.querySelectorAll(".check").length;
-        tasksRemainingText.innerText = tasksLeft + " tasks remaining";
+        trashFunction(item);
     });
 });
 
