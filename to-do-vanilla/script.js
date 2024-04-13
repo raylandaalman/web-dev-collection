@@ -74,7 +74,7 @@ trashFunction = (item) => {
     item.parentElement.parentElement.remove();
 
     const tasksLeft = document.querySelectorAll(".check").length;
-    tasksRemainingText.innerText = tasksLeft + " tasks remaining";
+    tasksRemainingText.innerText = tasksLeft + " items remaining";
 };
 
 
