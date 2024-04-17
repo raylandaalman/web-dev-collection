@@ -12,7 +12,7 @@ insertItem = (item) => {
 
     insertElement.insertAdjacentHTML("beforeend",
         `<div class="todo-entry">
-            <p class="todo-entry-text">${item}</p>
+            <p class="todo-entry-text">${JSON.stringify(item)}</p>
             <div class="todo-images">
                 <img src="img/check.svg" class="check"/>
                 <img src="img/trash.svg" class="trash"/>
