@@ -8,17 +8,33 @@ let itemNumber = sessionStorageKeys[sessionStorageKeys.length -1]
 
 // Creating elements from text in storage
 insertItem = (item) => {
-    insertElement = document.querySelector(".todo-body");
+    const divBody = document.querySelector('.todo-body');
 
-    insertElement.insertAdjacentHTML("beforeend",
-        `<div class="todo-entry">
-            <p class="todo-entry-text">${JSON.stringify(item)}</p>
-            <div class="todo-images">
-                <img src="img/check.svg" class="check"/>
-                <img src="img/trash.svg" class="trash"/>
-            </div>
-        </div>`);
-    
+    const div = document.createElement('div');
+    div.className = 'todo-entry';
+
+    const pElement = document.createElement('p');
+    pElement.className = 'todo-entry-text';
+    pElement.innerText = item;
+
+    const divInner = document.createElement('div');
+    divInner.className = 'todo-images';
+
+    const checkImg = document.createElement('img');
+    checkImg.className = 'check';
+    checkImg.src = 'img/check.svg';
+
+    const trashImg = document.createElement('img');
+    trashImg.className = 'trash';
+    trashImg.src = 'img/trash.svg';
+
+    divInner.appendChild(checkImg);
+    divInner.appendChild(trashImg);
+
+    div.appendChild(pElement);
+    div.appendChild(divInner);
+
+    divBody.appendChild(div);
 };
 
 
@@ -117,3 +133,16 @@ textBox.addEventListener("keydown", () => {
         addButton.click();
     }
 })
+
+/*
+
+Old way that HTML elements were added, this is susceptible to injection attacks
+
+        `<div class="todo-entry">
+            <p class="todo-entry-text">${JSON.stringify(item)}</p>
+            <div class="todo-images">
+                <img src="img/check.svg" class="check"/>
+                <img src="img/trash.svg" class="trash"/>
+            </div>
+        </div>`);
+*/
